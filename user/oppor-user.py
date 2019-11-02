@@ -21,7 +21,6 @@ logger.setLevel(logging.INFO)
 def lambda_handler(event, context):
     logger.info('Received new event {}, processing'.format(event))
     for record in event['Records']:
-        print(record['eventID'])
         return create_user(record['user'])
 
 
