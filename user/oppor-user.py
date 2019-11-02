@@ -8,7 +8,7 @@ import uuid
 from requests_aws4auth import AWS4Auth
 
 
-region = 'eu-west-1'
+region = 'us-east-2'
 service = 'es'
 credentials = boto3.Session().get_credentials()
 awsauth = AWS4Auth(credentials.access_key, credentials.secret_key, region, service, session_token=credentials.token)
@@ -20,8 +20,7 @@ logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     logger.info('Received new event {}, processing'.format(event))
-    for record in event['Records']:
-        return create_user(record['user'])
+    return create_user(event['User'])
 
 
 def create_user(user):
