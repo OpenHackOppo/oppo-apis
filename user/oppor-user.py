@@ -27,6 +27,6 @@ def create_user(user):
         user['Id'] = str(uuid.uuid4())
     endpoint = host + '/user' + '/_doc/' + user['Id']
     logger.info('Sending document {} to endpoint {}'.format(user, endpoint))
-    response = requests.put(endpoint, awsauth, json=user, headers=headers)
+    response = requests.put(endpoint, auth=awsauth, json=user, headers=headers)
     logger.info('Response from put request to ElasticSearch {}'.format(response))
     return user
