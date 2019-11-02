@@ -18,15 +18,15 @@ logger.setLevel(logging.INFO)
 
 def lambda_handler(event, context):
     logger.info('Received new event {}, processing'.format(event))
-    return create_user(event)
+    return create_job(event)
 
 
-def create_user(user):
-    logger.info('Creating/Updating user {}'.format(user))
-    if 'Id' not in user:
-        user['Id'] = str(uuid.uuid4())
-    endpoint = host + '/user' + '/_doc/' + user['Id']
-    logger.info('Sending document {} to endpoint {}'.format(user, endpoint))
-    response = requests.put(endpoint, awsauth, json=user, headers=headers)
+def create_job(job):
+    logger.info('Creating/Updating job {}'.format(job))
+    if 'Id' not in job:
+        job['Id'] = str(uuid.uuid4())
+    endpoint = host + '/job' + '/_doc/' + job['Id']
+    logger.info('Sending document {} to endpoint {}'.format(job, endpoint))
+    response = requests.put(endpoint, awsauth, json=job, headers=headers)
     logger.info('Response from put request to ElasticSearch {}'.format(response))
-    return user
+    return job
